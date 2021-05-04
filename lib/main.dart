@@ -10,6 +10,10 @@ import 'package:nehemiah/models/models.dart';
 import 'package:nehemiah/screens/screens.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:nehemiah/widgets/widgets.dart';
+import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
+
+//Dynamic Link Service
+import 'package:nehemiah/utils/life_cycle_manager.dart';
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:user_repository/user_repository.dart';
@@ -27,6 +31,8 @@ void main() {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  configureApp();
+
   runApp(FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
@@ -58,7 +64,8 @@ void main() {
 class CampaignsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return LifeCycleManager(
+        child: MaterialApp(
       title: CampaignLocalizations().appTitle,
       theme: CampaignTheme.theme,
       localizationsDelegates: [
@@ -98,7 +105,7 @@ class CampaignsApp extends StatelessWidget {
           );
         },
       },
-    );
+    ));
   }
 }
 

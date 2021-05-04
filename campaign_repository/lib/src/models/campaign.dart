@@ -40,7 +40,7 @@ class Campaign extends Equatable {
   })  : this.description = description ?? '',
         this.rosaryCount = rosaryCount ?? 0,
         this.mercyChapletCount = mercyChapletCount ?? 0,
-        this.fastingHourCount = fastingHourCount ?? 0.0,
+        this.fastingHourCount = fastingHourCount ?? 0.0001,
         this.penanceCount = penanceCount ?? 0,
         this.id = id ?? Uuid().generateV4(),
         this.category = category ?? 'general',

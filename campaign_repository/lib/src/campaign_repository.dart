@@ -16,4 +16,6 @@ abstract class CampaignRepository {
   Future<void> updateCampaign(Campaign campaign);
 
   Future<void> saveCampaigns(List<Campaign> campaigns);
+
+  Future<void> incrementRosaryCount(Campaign campaign);
 }

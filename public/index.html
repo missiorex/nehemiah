@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    Fore more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A prayer campaign App">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="nehemiah">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>nehemiah</title>
+  <link rel="manifest" href="manifest.json">
+
+
+  <style>
+        .loading {
+            background: #fff url('assets/assets/gif/loader.gif') no-repeat center center;
+            background-size:contain;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .loader {
+
+            border: 2px solid transparent;
+            border-radius: 50%;
+            border-top: 2px solid #223044;
+            border-right: 2px solid #cb060a;
+            border-bottom: 2px solid #223044;
+            border-left: 2px solid #223044;
+            width: 200px;
+            height: 200px;
+            z-index:100;
+             -webkit-animation: spin 8s linear infinite;
+            animation: spin 8s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+
+
+
+  <div class="loading">
+    <div class="loader"></div>
+  </div>
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <!--Firebase App (the core Firebase SDK) is always required and must be listed first-->
+  <script defer src="https://www.gstatic.com/firebasejs/7.22.1/firebase-app.js"></script>
+
+  <script defer src="./init-firebase.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script defer src="https://www.gstatic.com/firebasejs/7.22.1/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script defer src="https://www.gstatic.com/firebasejs/7.22.1/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.22.1/firebase-firestore.js"></script>
+
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <!--<script defer src="/__/firebase/7.21.1/firebase-app.js"></script>-->
+
+  <!--&lt;!&ndash; If you enabled Analytics in your project, add the Firebase SDK for Analytics &ndash;&gt;-->
+  <!--<script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>-->
+
+  <!--&lt;!&ndash; Add Firebase products that you want to use &ndash;&gt;-->
+  <!--<script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>-->
+  <!--<script defer src="/__/firebase/7.21.1/firebase-firestore.js"></script>-->
+
+  <script defer src="main.dart.js?version=2" type="application/javascript"></script>
+
+  <!-- Initialize Firebase -->
+  <!--<script defer src="/__/firebase/init.js"></script>-->
+
+
+
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=1344623533');
+      });
+    }
+  </script>
+
+</body>
+</html>

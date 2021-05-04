@@ -64,6 +64,11 @@ class FilteredCampaigns extends StatelessWidget {
                         campaign.copyWith(complete: !campaign.complete)),
                   );
                 },
+                onRosaryIncrement: () {
+                  BlocProvider.of<CampaignsBloc>(context).add(
+                    RosaryCountUpdated(campaign),
+                  );
+                },
               );
             },
           );

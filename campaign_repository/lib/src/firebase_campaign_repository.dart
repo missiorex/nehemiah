@@ -9,18 +9,30 @@ import 'entities/entities.dart';
 
 class FirebaseCampaignRepository implements CampaignRepository {
   final campaignCollection = FirebaseFirestore.instance.collection('campaigns');
+  final statsRef =
+      FirebaseFirestore.instance.collection('stats').doc('--campaigns--');
+
   final priorityCampaignsCollection = FirebaseFirestore.instance
       .collection('campaigns')
       .where('isPriority', isEqualTo: true);
 
   @override
   Future<void> addNewCampaign(Campaign campaign) {
-    return campaignCollection.add(campaign.toEntity().toDocument());
+    var batch = FirebaseFirestore.instance.batch();
+    batch.set(
+        campaignCollection.doc(campaign.id), campaign.toEntity().toDocument());
+    batch.set(statsRef, {'campaignsCount': FieldValue.increment(1)},
+        SetOptions(merge: true));
+    return batch.commit();
   }
 
   @override
   Future<void> deleteCampaign(Campaign campaign) async {
-    return campaignCollection.doc(campaign.id).delete();
+    var batch = FirebaseFirestore.instance.batch();
+    batch.delete(campaignCollection.doc(campaign.id));
+    batch.set(statsRef, {'campaignsCount': FieldValue.increment(-1)},
+        SetOptions(merge: true));
+    return batch.commit();
   }
 
   @override
@@ -46,5 +58,17 @@ class FirebaseCampaignRepository implements CampaignRepository {
           .doc(update.id)
           .update(update.toEntity().toDocument());
     });
+  }
+
+  @override
+  Future<void> incrementRosaryCount(Campaign campaign) async {
+    final DocumentReference ref = campaignCollection.doc(campaign.id);
+
+    // Update rosary  count
+    ref.update({'rosaryCount': FieldValue.increment(1)});
+
+//    await ref.update(<String, dynamic>{
+//      'rosaryCount': FieldValue.increment(1),
+//    });
   }
 }

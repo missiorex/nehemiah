@@ -46,6 +46,18 @@ class CampaignUpdated extends CampaignsEvent {
   String toString() => 'CampaignUpdated { updatedCampaign: $campaign }';
 }
 
+class RosaryCountUpdated extends CampaignsEvent {
+  final Campaign campaign;
+
+  const RosaryCountUpdated(this.campaign);
+
+  @override
+  List<Object> get props => [campaign];
+
+  @override
+  String toString() => 'RosaryCountUpdated { updatedCampaign: $campaign }';
+}
+
 class CampaignDeleted extends CampaignsEvent {
   final Campaign campaign;
 

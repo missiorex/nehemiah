@@ -27,6 +27,8 @@ class CampaignsBloc extends Bloc<CampaignsEvent, CampaignsState> {
       yield* _mapToggleAllToState();
     } else if (event is ClearCompleted) {
       yield* _mapClearCompletedToState();
+    } else if (event is RosaryCountUpdated) {
+      yield* _mapRosaryCountUpdatedToState(event);
     }
   }
 
@@ -106,6 +108,20 @@ class CampaignsBloc extends Bloc<CampaignsEvent, CampaignsState> {
     }
   }
 
+  Stream<CampaignsState> _mapRosaryCountUpdatedToState(
+      RosaryCountUpdated event) async* {
+    if (state is CampaignsLoadSuccess) {
+      _incrementRosaryCount(event.campaign);
+
+//      final List<Campaign> updatedCampaigns =
+//      (state as CampaignsLoadSuccess).campaigns.map((campaign) {
+//        return campaign.id == event.campaign.id ? event.campaign : campaign;
+//      }).toList();
+//      yield CampaignsLoadSuccess(updatedCampaigns);
+//      _saveCampaigns(updatedCampaigns);
+    }
+  }
+
   Stream<CampaignsState> _mapCampaignDeletedToState(
       CampaignDeleted event) async* {
     if (state is CampaignsLoadSuccess) {
@@ -150,6 +166,10 @@ class CampaignsBloc extends Bloc<CampaignsEvent, CampaignsState> {
 
   Future _addCampaign(Campaign campaign) {
     return campaignsRepository.addNewCampaign(campaign);
+  }
+
+  Future _incrementRosaryCount(Campaign campaign) {
+    return campaignsRepository.incrementRosaryCount(campaign);
   }
 
   Future _deleteCampaign(Campaign campaign) {
