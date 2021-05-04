@@ -1,0 +1,6 @@
+package com.missiorex.nehemiah
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}

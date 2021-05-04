@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "579214722555",
+    "project_id": "nehemiah-b1bea",
+    "storage_bucket": "nehemiah-b1bea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579214722555:android:431969ec935a939bf6775e",
+        "android_client_info": {
+          "package_name": "com.missiorex.nehemiah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579214722555-b9t026e7ogtjvk69a0sjob3tj5ut38f4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.missiorex.nehemiah",
+            "certificate_hash": "003f7609d38fe573df5ff3da91a01f77bd1f0b78"
+          }
+        },
+        {
+          "client_id": "579214722555-nrnq9hst503v4i0jj4aq9kcfhdocr1jj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ4rxb4B8cdR0xN6hyhfevq_XkhcKgdfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579214722555-nrnq9hst503v4i0jj4aq9kcfhdocr1jj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
