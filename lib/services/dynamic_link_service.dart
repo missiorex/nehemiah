@@ -29,13 +29,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart' as foundation;
+import 'dart:js' as js;
 
 typedef DynamicLinkAction(PendingDynamicLinkData dynamicLink);
+typedef WebLinkAction(Uri uri);
 
 class DynamicLinkService {
   final DynamicLinkAction dynamicLinkAction;
+  final WebLinkAction webLinkAction;
 
-  DynamicLinkService({this.dynamicLinkAction});
+  DynamicLinkService({this.dynamicLinkAction, this.webLinkAction});
 
   static const String kDynamicLinkURL =
       'https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyCQ4rxb4B8cdR0xN6hyhfevq_XkhcKgdfI';
@@ -96,6 +99,12 @@ class DynamicLinkService {
           dynamicLinkAction(dynamicLink);
         }
       });
+    } else if ((foundation.kIsWeb)) {
+      var uri = Uri.tryParse(js.context['location']['href']);
+
+      print("URI is " + uri.toString());
+
+      if (uri != null) webLinkAction(uri);
     }
   }
 

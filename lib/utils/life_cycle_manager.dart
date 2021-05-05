@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nehemiah/services/dynamic_link_service.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:nehemiah/utils/utils.dart';
+import 'dart:js' as js;
 
 class LifeCycleManager extends StatefulWidget {
   final Widget child;
@@ -18,7 +19,8 @@ class _LifeCycleManagerState extends State<LifeCycleManager>
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     super.initState();
-    _service = DynamicLinkService(dynamicLinkAction: dynamicLinkAction);
+    _service = DynamicLinkService(
+        dynamicLinkAction: dynamicLinkAction, webLinkAction: webLinkAction);
     _service.retrieveDynamicLink();
   }
 
@@ -53,7 +55,18 @@ class _LifeCycleManagerState extends State<LifeCycleManager>
         CampaignScreenArguments(paramsMap['id']);
 
     Navigator.pushNamed(context, dynamicLink.link.path, arguments: arguments);
+  }
 
-    // Parameter a is 1 and parameter b is 2
+  Future webLinkAction(Uri t_uri) async {
+    var uri = Uri.tryParse(js.context['location']['href']);
+    Map paramsMap = uri?.queryParameters ?? {};
+
+    print(
+        'Web Parameter a is ${paramsMap['id']} and parameter b is ${paramsMap['b']}');
+
+    CampaignScreenArguments arguments =
+        CampaignScreenArguments(paramsMap['id']);
+
+    //Navigator.pushNamed(context, uri.path, arguments: arguments);
   }
 }
