@@ -11,6 +11,7 @@ import 'package:nehemiah/screens/screens.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:nehemiah/widgets/widgets.dart';
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
+import 'package:nehemiah/utils/utils.dart';
 
 //Dynamic Link Service
 import 'package:nehemiah/utils/life_cycle_manager.dart';
@@ -64,8 +65,7 @@ void main() {
 class CampaignsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LifeCycleManager(
-        child: MaterialApp(
+    return MaterialApp(
       title: CampaignLocalizations().appTitle,
       theme: CampaignTheme.theme,
       localizationsDelegates: [
@@ -90,7 +90,7 @@ class CampaignsApp extends StatelessWidget {
                 ),
               ),
             ],
-            child: HomeScreen(),
+            child: LifeCycleManager(child: HomeScreen()),
           );
         },
         CampaignRoutes.addCampaign: (context) {
@@ -105,9 +105,40 @@ class CampaignsApp extends StatelessWidget {
           );
         },
       },
-    ));
+      onGenerateRoute: (settings) {
+        // If you push the Campaign Details route
+        if (settings.name == CampaignDetailsScreen.routeName) {
+          final CampaignScreenArguments args =
+              settings.arguments as CampaignScreenArguments;
+
+          // Then, extract the required data from
+          // the arguments and pass the data to the
+          // correct screen.
+          return MaterialPageRoute(
+            builder: (context) {
+              return CampaignDetailsScreen(
+                id: args.id,
+              );
+            },
+          );
+        }
+        // The code only supports
+        // PassArgumentsScreen.routeName right now.
+        // Other values need to be implemented if we
+        // add them. The assertion here will help remind
+        // us of that higher up in the call stack, since
+        // this assertion would otherwise fire somewhere
+        // in the framework.
+        assert(false, 'Need to implement ${settings.name}');
+        return null;
+      },
+    );
   }
 }
+
+// You can pass any object to the arguments parameter.
+// In this example, create a class that contains both
+// a customizable title and message.
 
 //void main() async {
 //  Bloc.observer = SimpleBlocObserver();

@@ -5,10 +5,12 @@ import 'package:missio_app_core/missio_app_core.dart';
 import 'package:nehemiah/blocs/blocs.dart';
 import 'package:nehemiah/screens/screens.dart';
 
-class DetailsScreen extends StatelessWidget {
+class CampaignDetailsScreen extends StatelessWidget {
   final String id;
 
-  DetailsScreen({Key key, @required this.id})
+  static const routeName = '/campaign';
+
+  CampaignDetailsScreen({Key key, @required this.id})
       : super(key: key ?? CampaignKeys.campaignDetailsScreen);
 
   @override

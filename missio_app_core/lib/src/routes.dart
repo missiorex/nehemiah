@@ -5,4 +5,5 @@
 class CampaignRoutes {
   static final home = '/';
   static final addCampaign = '/addCampaign';
+  static final campaign = '/campaign';
 }

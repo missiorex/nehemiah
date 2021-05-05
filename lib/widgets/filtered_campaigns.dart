@@ -43,7 +43,7 @@ class FilteredCampaigns extends StatelessWidget {
                 onTap: () async {
                   final removedTodo = await Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) {
-                      return DetailsScreen(id: campaign.id);
+                      return CampaignDetailsScreen(id: campaign.id);
                     }),
                   );
                   if (removedTodo != null) {

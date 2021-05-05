@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nehemiah/services/dynamic_link_service.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:nehemiah/utils/utils.dart';
 
 class LifeCycleManager extends StatefulWidget {
   final Widget child;
@@ -46,9 +47,12 @@ class _LifeCycleManagerState extends State<LifeCycleManager>
   Future dynamicLinkAction(PendingDynamicLinkData dynamicLink) async {
     Map paramsMap = dynamicLink?.link?.queryParameters ?? {};
     print(
-        'Parameter a is ${paramsMap['a']} and parameter b is ${paramsMap['b']}');
+        'Parameter a is ${paramsMap['id']} and parameter b is ${paramsMap['b']}');
 
-    Navigator.pushNamed(context, dynamicLink.link.path);
+    CampaignScreenArguments arguments =
+        CampaignScreenArguments(paramsMap['id']);
+
+    Navigator.pushNamed(context, dynamicLink.link.path, arguments: arguments);
 
     // Parameter a is 1 and parameter b is 2
   }

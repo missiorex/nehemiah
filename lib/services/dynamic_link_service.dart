@@ -48,7 +48,7 @@ class DynamicLinkService {
     if (parametersList.isNotEmpty) {
       link = link + '?${parametersList.join('&')}';
     }
-    Map headers = {'Content-Type': 'application/json'};
+    Map<String, String> headers = {'Content-Type': 'application/json'};
 
     // Configure the Dynamic Link
     Map body = {
